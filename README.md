@@ -8,7 +8,7 @@
 
 > **Results at a glance** (6-task slice) — an `expert` solution scores **100%**, a `naive-llm` that takes the documented shortcut scores **0%**, the optional LLM-as-judge agrees with humans **87.5%** of the time, and *every* verdict is reproduced by CI against real PostGIS.
 
-> _Replace the `Kevin1289/geo-eval-forge` paths above with your actual repo, and add a dashboard screenshot here once Pages is live._
+![geo-eval-forge dashboard — leaderboard, judge agreement, failure taxonomy, and per-task candidates](docs/dashboard.png)
 
 LLMs are good at *talking about* GIS and bad at *doing* it: they compute distances in degrees, confuse `ST_Intersects` with `ST_Intersection`, filter with `ST_Distance` instead of the index-aware `ST_DWithin`, blend QGIS 2/3/4 APIs, and — most dangerously — they answer **unsolvable** spatial questions instead of refusing them. Published benchmarks (GeoBenchX, GeoAnalystBench) put the best models around ~55% on real multi-step GIS work.
 
@@ -42,6 +42,12 @@ geoeval (Python)
 dashboard (Next.js, static export)
   Leaderboard · MapExplorer (MapLibre) · FailureTaxonomy · JudgeAgreement
 ```
+
+The MapLibre results explorer overlays each candidate's geometry on the golden answer,
+so a spatial error is visible at a glance (here: a sensor outside every zone that the
+wrong candidate still assigned to one):
+
+![MapLibre results explorer](docs/dashboard-map.png)
 
 ### The task categories (each embeds a documented AI failure mode)
 
