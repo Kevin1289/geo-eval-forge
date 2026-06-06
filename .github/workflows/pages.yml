@@ -36,8 +36,10 @@ jobs:
           cp results/results.json dashboard/public/results.json
           cp -r results/geojson dashboard/public/geojson
       - name: build static site (basePath = repo name)
+        # export inline so the var applies to THIS step's `npm run build`
+        # (a $GITHUB_ENV write would only affect later steps).
         run: |
-          echo "PAGES_BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> "$GITHUB_ENV"
+          export PAGES_BASE_PATH="/${GITHUB_REPOSITORY#*/}"
           cd dashboard && npm install && npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
