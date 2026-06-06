@@ -2,6 +2,14 @@
 
 **A reproducible GeoAI benchmark + eval harness for the open-source geospatial stack (QGIS / PyQGIS · GDAL/OGR · PostGIS · GeoServer).**
 
+[![ci](https://github.com/Kevin1289/geo-eval-forge/actions/workflows/ci.yml/badge.svg)](https://github.com/Kevin1289/geo-eval-forge/actions/workflows/ci.yml)
+[![deploy-dashboard](https://github.com/Kevin1289/geo-eval-forge/actions/workflows/pages.yml/badge.svg)](https://github.com/Kevin1289/geo-eval-forge/actions/workflows/pages.yml)
+&nbsp;·&nbsp; **[▶ Live dashboard](https://kevin1289.github.io/geo-eval-forge/)** &nbsp;·&nbsp; code MIT · data CC BY 4.0
+
+> **Results at a glance** (6-task slice) — an `expert` solution scores **100%**, a `naive-llm` that takes the documented shortcut scores **0%**, the optional LLM-as-judge agrees with humans **87.5%** of the time, and *every* verdict is reproduced by CI against real PostGIS.
+
+> _Replace the `Kevin1289/geo-eval-forge` paths above with your actual repo, and add a dashboard screenshot here once Pages is live._
+
 LLMs are good at *talking about* GIS and bad at *doing* it: they compute distances in degrees, confuse `ST_Intersects` with `ST_Intersection`, filter with `ST_Distance` instead of the index-aware `ST_DWithin`, blend QGIS 2/3/4 APIs, and — most dangerously — they answer **unsolvable** spatial questions instead of refusing them. Published benchmarks (GeoBenchX, GeoAnalystBench) put the best models around ~55% on real multi-step GIS work.
 
 `geo-eval-forge` turns those failure modes into a **machine-graded benchmark**. Every task ships:
@@ -81,6 +89,22 @@ geoeval judge --adapter vertex     # LLM-as-judge, then reports human-agreement
 ```
 
 ---
+
+## Training-data export
+
+The benchmark doubles as a generator of ready-to-use training/eval data:
+
+```bash
+make export      # -> dataset/records.jsonl  +  dataset/preference_pairs.jsonl
+```
+
+- `records.jsonl` — one row per candidate (SFT/eval item): prompt, solution/output,
+  whether it passed the deterministic verifier, and the rationale.
+- `preference_pairs.jsonl` — one `chosen` (correct) vs `rejected` (wrong) row per
+  task (DPO/RLHF-style), tagged with the failure class and why the rejected one is wrong.
+
+Because the label comes from a real verifier run, every row is machine-checkable rather
+than human-asserted — which is the point.
 
 ## How a task is defined
 

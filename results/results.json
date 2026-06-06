@@ -350,8 +350,8 @@
     }
   ],
   "judge": {
-    "calibrated": true,
-    "n_labels": 8,
-    "human_agreement": 0.875
+    "calibrated": false,
+    "human_agreement": null,
+    "n_labels": 0
   }
 }

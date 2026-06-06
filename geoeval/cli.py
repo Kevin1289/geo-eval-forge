@@ -102,6 +102,15 @@ def cmd_judge(args) -> int:
     return 0
 
 
+def cmd_export(args) -> int:
+    from .export import write
+    out_dir = Path(args.out)
+    n_rec, n_pairs = write(out_dir)
+    print(f"wrote {n_rec} records          -> {out_dir / 'records.jsonl'}")
+    print(f"wrote {n_pairs} preference pairs -> {out_dir / 'preference_pairs.jsonl'}")
+    return 0
+
+
 def _print_summary(results: dict) -> None:
     print(f"\n{results['suite']}  [{results['mode']}]  "
           f"{len(results['tasks'])} tasks, categories: {', '.join(results['categories'])}")
@@ -157,6 +166,10 @@ def main(argv: list[str] | None = None) -> int:
     sp.add_argument("--model", help="model name for the adapter")
     sp.add_argument("--out", default=str(DEFAULT_OUT), help="results.json to patch with the agreement")
     sp.set_defaults(func=cmd_judge)
+
+    sp = sub.add_parser("export", help="export AI-training data (records + preference pairs) as JSONL")
+    sp.add_argument("--out", default=str(ROOT / "dataset"), help="output directory")
+    sp.set_defaults(func=cmd_export)
 
     args = p.parse_args(argv)
     return args.func(args)

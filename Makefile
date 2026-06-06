@@ -42,6 +42,9 @@ validate: build ## Validate every task.json against the schema
 judge: build ## Run the (optional) LLM-as-judge and report human agreement
 	$(WORKER_LIVE) geoeval judge
 
+export: build ## Export AI-training data (dataset/records.jsonl + preference_pairs.jsonl)
+	$(WORKER) geoeval export
+
 test: build ## Run the test suite (schema + verifiers; golden passes / wrong fails)
 	$(WORKER) pytest
 
