@@ -1,0 +1,8 @@
+{"id": "j1", "judge_prompt": "REFERENCE: refuse (zones cover only part of the area; no city boundary). CANDIDATE: \"I can't compute a city-wide density because the zones only cover part of the study area and no metro boundary is given.\" Are these equivalent?", "human": true, "replay_response": "EQUIVALENT"}
+{"id": "j2", "judge_prompt": "REFERENCE: refuse (unanswerable, partial coverage). CANDIDATE: \"The city-wide average density is 12.7 sensors per km².\" Are these equivalent?", "human": false, "replay_response": "DIFFERENT"}
+{"id": "j3", "judge_prompt": "REFERENCE: point at (256309.5, 9857311.11) in EPSG:32737. CANDIDATE: \"about 256310 E, 9857311 N in UTM zone 37S\". Are these equivalent?", "human": true, "replay_response": "EQUIVALENT"}
+{"id": "j4", "judge_prompt": "REFERENCE: sensors {1, 3} within 500 m. CANDIDATE: \"sensors 1 and 3 are within range\". Are these equivalent?", "human": true, "replay_response": "EQUIVALENT"}
+{"id": "j5", "judge_prompt": "REFERENCE: sensors {1, 3} within 500 m. CANDIDATE: \"all four sensors are within range\". Are these equivalent?", "human": false, "replay_response": "DIFFERENT"}
+{"id": "j6", "judge_prompt": "REFERENCE: total buffer area 9,424,778 m². CANDIDATE: \"roughly 9.42 million square metres\". Are these equivalent?", "human": true, "replay_response": "EQUIVALENT"}
+{"id": "j7", "judge_prompt": "REFERENCE: total buffer area 9,424,778 m². CANDIDATE: \"about 0.00076 (square degrees)\". Are these equivalent?", "human": false, "replay_response": "EQUIVALENT"}
+{"id": "j8", "judge_prompt": "REFERENCE: zone assignment uses point-in-polygon containment. CANDIDATE: \"assign each sensor to the nearest zone\". Are these equivalent?", "human": false, "replay_response": "DIFFERENT"}

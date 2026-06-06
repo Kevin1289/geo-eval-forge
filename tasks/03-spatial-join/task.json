@@ -1,0 +1,11 @@
+{
+  "id": "03-spatial-join",
+  "title": "Assign each sensor its containing zone",
+  "category": "topology",
+  "difficulty": "medium",
+  "prompt": "Tables `t03_sensors` (points) and `t03_zones` (polygons) are both in EPSG:4326. For each sensor return its id and the id of the zone that CONTAINS it (0 if it is inside no zone).",
+  "solvable": true,
+  "expected": { "epsg": 4326 },
+  "inputs": { "t03_sensors": "4 points", "t03_zones": "2 polygons" },
+  "verifier": { "name": "vector_equiv", "params": { "tolerance": 0.0, "id_field": "id", "check_attrs": ["zone_id"] } }
+}

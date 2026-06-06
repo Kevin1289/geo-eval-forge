@@ -1,0 +1,11 @@
+{
+  "id": "06-service-wfs",
+  "title": "Publish zones and read them back over WFS",
+  "category": "services",
+  "difficulty": "medium",
+  "prompt": "Publish the `zones` PostGIS layer in GeoServer (workspace `geoeval`) and return the number of features a WFS 2.0 GetFeature returns for the bbox covering all zones.",
+  "solvable": true,
+  "expected": { "kind": "service" },
+  "inputs": { "zones": "4 polygons in PostGIS (published via GeoServer)" },
+  "verifier": { "name": "service_check", "params": { "tolerance": 0 } }
+}

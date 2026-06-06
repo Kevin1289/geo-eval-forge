@@ -1,0 +1,17 @@
+{
+  "candidates": [
+    {
+      "name": "correct",
+      "label": "correct",
+      "description": "Publishes the layer and queries WFS 2.0 with a CRS-qualified bbox (urn:ogc:def:crs:EPSG::4326), getting all 4 zones.",
+      "produced": { "feature_count": 4 }
+    },
+    {
+      "name": "wrong_axis_order",
+      "label": "wrong",
+      "failure_class": "wfs-bbox-axis-order",
+      "description": "Passed the bbox as minx,miny,maxx,maxy without a CRS URI. WFS 2.0 / EPSG:4326 expects lat,lon (Y,X) axis order, so the bbox lands in the ocean and returns 0 features.",
+      "produced": { "feature_count": 0 }
+    }
+  ]
+}

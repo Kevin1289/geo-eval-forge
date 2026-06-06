@@ -1,0 +1,50 @@
+{
+  "candidates": [
+    {
+      "name": "correct",
+      "label": "correct",
+      "solution": "correct.sql",
+      "description": "ST_Transform reprojects the coordinates into EPSG:32737.",
+      "produced": {
+        "type": "FeatureCollection",
+        "crs_epsg": 32737,
+        "features": [
+          { "type": "Feature", "properties": { "id": 1 }, "geometry": { "type": "Point", "coordinates": [256309.5, 9857311.11] } },
+          { "type": "Feature", "properties": { "id": 2 }, "geometry": { "type": "Point", "coordinates": [258537.96, 9855100.81] } },
+          { "type": "Feature", "properties": { "id": 3 }, "geometry": { "type": "Point", "coordinates": [254081.0, 9859521.45] } }
+        ]
+      }
+    },
+    {
+      "name": "wrong_assign_srid",
+      "label": "wrong",
+      "failure_class": "crs-relabel-not-reproject",
+      "solution": "wrong_assign_srid.sql",
+      "description": "Relabeled the CRS to 32737 (ST_SetSRID) but never transformed the coordinates — they are still lon/lat degrees.",
+      "produced": {
+        "type": "FeatureCollection",
+        "crs_epsg": 32737,
+        "features": [
+          { "type": "Feature", "properties": { "id": 1 }, "geometry": { "type": "Point", "coordinates": [36.81, -1.29] } },
+          { "type": "Feature", "properties": { "id": 2 }, "geometry": { "type": "Point", "coordinates": [36.83, -1.31] } },
+          { "type": "Feature", "properties": { "id": 3 }, "geometry": { "type": "Point", "coordinates": [36.79, -1.27] } }
+        ]
+      }
+    },
+    {
+      "name": "wrong_utm_zone",
+      "label": "wrong",
+      "failure_class": "crs-wrong-zone",
+      "description": "Reprojected to the wrong UTM zone (EPSG:32736 instead of 32737).",
+      "produced": {
+        "type": "FeatureCollection",
+        "crs_epsg": 32736,
+        "features": [
+          { "type": "Feature", "properties": { "id": 1 }, "geometry": { "type": "Point", "coordinates": [924512.0, 9858000.0] } },
+          { "type": "Feature", "properties": { "id": 2 }, "geometry": { "type": "Point", "coordinates": [926700.0, 9855800.0] } },
+          { "type": "Feature", "properties": { "id": 3 }, "geometry": { "type": "Point", "coordinates": [922300.0, 9860200.0] } }
+        ]
+      }
+    }
+  ]
+}

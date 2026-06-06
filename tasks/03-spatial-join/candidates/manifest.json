@@ -1,0 +1,37 @@
+{
+  "candidates": [
+    {
+      "name": "correct",
+      "label": "correct",
+      "solution": "correct.sql",
+      "description": "ST_Contains point-in-polygon with a LEFT JOIN; outside points map to 0.",
+      "produced": {
+        "type": "FeatureCollection",
+        "crs_epsg": 4326,
+        "features": [
+          { "type": "Feature", "properties": { "id": 1, "zone_id": 1 }, "geometry": { "type": "Point", "coordinates": [36.81, -1.29] } },
+          { "type": "Feature", "properties": { "id": 2, "zone_id": 2 }, "geometry": { "type": "Point", "coordinates": [36.83, -1.29] } },
+          { "type": "Feature", "properties": { "id": 3, "zone_id": 0 }, "geometry": { "type": "Point", "coordinates": [36.85, -1.29] } },
+          { "type": "Feature", "properties": { "id": 4, "zone_id": 1 }, "geometry": { "type": "Point", "coordinates": [36.815, -1.285] } }
+        ]
+      }
+    },
+    {
+      "name": "wrong_nearest",
+      "label": "wrong",
+      "failure_class": "nearest-not-contains",
+      "solution": "wrong_nearest.sql",
+      "description": "Assigned the nearest zone instead of the containing zone; sensor 3 (outside all zones) was wrongly assigned zone 2.",
+      "produced": {
+        "type": "FeatureCollection",
+        "crs_epsg": 4326,
+        "features": [
+          { "type": "Feature", "properties": { "id": 1, "zone_id": 1 }, "geometry": { "type": "Point", "coordinates": [36.81, -1.29] } },
+          { "type": "Feature", "properties": { "id": 2, "zone_id": 2 }, "geometry": { "type": "Point", "coordinates": [36.83, -1.29] } },
+          { "type": "Feature", "properties": { "id": 3, "zone_id": 2 }, "geometry": { "type": "Point", "coordinates": [36.85, -1.29] } },
+          { "type": "Feature", "properties": { "id": 4, "zone_id": 1 }, "geometry": { "type": "Point", "coordinates": [36.815, -1.285] } }
+        ]
+      }
+    }
+  ]
+}

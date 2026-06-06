@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geoeval"
+version = "0.1.0"
+description = "geo-eval-forge: a reproducible GeoAI benchmark + eval harness for QGIS/PostGIS/GDAL/GeoServer tasks where LLMs fail."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "geo-eval-forge" }]
+dependencies = [
+    "shapely>=2.0",     # GEOS-backed geometry equivalence (vector_equiv, buffer/area checks)
+    "jsonschema>=4.0",  # task.json contract validation
+    "requests>=2.28",   # GeoServer REST + OGC service checks
+]
+
+[project.optional-dependencies]
+# Live PostGIS/GeoServer run path (the worker container installs these).
+live = [
+    "psycopg[binary]>=3.1",
+    "pyproj>=3.4",
+]
+# Default live LLM adapter for the LLM-as-judge / baseline runs (offline replay needs none of this).
+vertex = [
+    "google-cloud-aiplatform>=1.40",
+]
+dev = [
+    "pytest>=7.4",
+]
+
+[project.scripts]
+geoeval = "geoeval.cli:main"
+
+[tool.setuptools]
+packages = ["geoeval", "geoeval.verifiers", "geoeval.adapters"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "integration: requires the live Docker stack (PostGIS/GeoServer); skipped by default",
+]
+addopts = "-m 'not integration'"

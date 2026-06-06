@@ -1,0 +1,19 @@
+{
+  "candidates": [
+    {
+      "name": "correct",
+      "label": "correct",
+      "solution": "correct.sql",
+      "description": "Buffers on geography (metres) and sums ST_Area in m².",
+      "produced": { "value": 9424777.96, "unit": "m2" }
+    },
+    {
+      "name": "wrong_degrees",
+      "label": "wrong",
+      "failure_class": "area-in-degrees",
+      "solution": "wrong_degrees.sql",
+      "description": "Buffered in degrees on a 4326 layer; ST_Area returned square degrees (~7.6e-4) instead of m².",
+      "produced": { "value": 0.000763, "unit": "m2" }
+    }
+  ]
+}

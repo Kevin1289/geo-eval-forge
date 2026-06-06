@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+  "display_crs": 4326,
+  "features": [
+    { "type": "Feature", "properties": { "_role": "zone", "id": 1 }, "geometry": { "type": "Polygon", "coordinates": [[[36.80,-1.30],[36.82,-1.30],[36.82,-1.28],[36.80,-1.28],[36.80,-1.30]]] } },
+    { "type": "Feature", "properties": { "_role": "zone", "id": 2 }, "geometry": { "type": "Polygon", "coordinates": [[[36.82,-1.30],[36.84,-1.30],[36.84,-1.28],[36.82,-1.28],[36.82,-1.30]]] } },
+    { "type": "Feature", "properties": { "_role": "golden", "id": 1, "zone_id": 1 }, "geometry": { "type": "Point", "coordinates": [36.81, -1.29] } },
+    { "type": "Feature", "properties": { "_role": "golden", "id": 2, "zone_id": 2 }, "geometry": { "type": "Point", "coordinates": [36.83, -1.29] } },
+    { "type": "Feature", "properties": { "_role": "golden", "id": 3, "zone_id": 0 }, "geometry": { "type": "Point", "coordinates": [36.85, -1.29] } },
+    { "type": "Feature", "properties": { "_role": "golden", "id": 4, "zone_id": 1 }, "geometry": { "type": "Point", "coordinates": [36.815, -1.285] } },
+    { "type": "Feature", "properties": { "_role": "wrong_nearest", "id": 3, "zone_id": 2 }, "geometry": { "type": "Point", "coordinates": [36.85, -1.29] } }
+  ]
+}

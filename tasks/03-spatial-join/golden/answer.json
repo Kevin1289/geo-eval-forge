@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "crs_epsg": 4326,
+  "features": [
+    { "type": "Feature", "properties": { "id": 1, "zone_id": 1 }, "geometry": { "type": "Point", "coordinates": [36.81, -1.29] } },
+    { "type": "Feature", "properties": { "id": 2, "zone_id": 2 }, "geometry": { "type": "Point", "coordinates": [36.83, -1.29] } },
+    { "type": "Feature", "properties": { "id": 3, "zone_id": 0 }, "geometry": { "type": "Point", "coordinates": [36.85, -1.29] } },
+    { "type": "Feature", "properties": { "id": 4, "zone_id": 1 }, "geometry": { "type": "Point", "coordinates": [36.815, -1.285] } }
+  ]
+}

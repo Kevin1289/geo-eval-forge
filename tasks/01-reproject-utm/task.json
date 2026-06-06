@@ -1,0 +1,14 @@
+{
+  "id": "01-reproject-utm",
+  "title": "Reproject points from WGS84 to UTM 37S",
+  "category": "crs",
+  "difficulty": "easy",
+  "prompt": "The table `t01_points` holds 3 points in EPSG:4326 (lon/lat) near Nairobi. Reproject them to the appropriate UTM zone for this area (EPSG:32737) and return id + geometry in that CRS.",
+  "solvable": true,
+  "expected": { "epsg": 32737 },
+  "inputs": { "t01_points": "3 points, EPSG:4326" },
+  "verifier": [
+    { "name": "crs_check", "params": { "epsg": 32737 } },
+    { "name": "vector_equiv", "params": { "tolerance": 1.0, "id_field": "id" } }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "candidates": [
+    {
+      "name": "correct",
+      "label": "correct",
+      "solution": "correct.sql",
+      "description": "ST_DWithin on geography: metric and index-aware. Returns {1,3}.",
+      "produced": { "columns": ["id"], "rows": [[1], [3]] }
+    },
+    {
+      "name": "wrong_distance_degrees",
+      "label": "wrong",
+      "failure_class": "distance-in-degrees-seqscan",
+      "solution": "wrong_distance_degrees.sql",
+      "description": "ST_Distance < 500 on a 4326 geometry compares in degrees (matches everything) and defeats the GiST index. Returns {1,2,3,4}.",
+      "produced": { "columns": ["id"], "rows": [[1], [2], [3], [4]] }
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+name: geo-eval-forge
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LOCAL DEVELOPMENT STACK.
+# The credentials below (geoeval / geoserver) are INSECURE DEFAULTS for use on a
+# developer machine only. For any shared or internet-exposed deployment:
+#   • override every *_PASSWORD via a .env file (see .env.example),
+#   • do not publish ports 5432 / 8080 to untrusted networks.
+# These services are not hardened for production.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  postgis:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-geoeval}
+      POSTGRES_USER: ${POSTGRES_USER:-geoeval}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-geoeval}
+    volumes:
+      - ./infra/postgis/initdb:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-geoeval} -d ${POSTGRES_DB:-geoeval}"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  geoserver:
+    image: docker.osgeo.org/geoserver:2.25.2
+    environment:
+      GEOSERVER_ADMIN_USER: ${GEOSERVER_ADMIN_USER:-admin}
+      GEOSERVER_ADMIN_PASSWORD: ${GEOSERVER_ADMIN_PASSWORD:-geoserver}
+      SKIP_DEMO_DATA: "true"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: .
+      dockerfile: infra/worker/Dockerfile
+    environment:
+      POSTGRES_HOST: postgis
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-geoeval}
+      POSTGRES_USER: ${POSTGRES_USER:-geoeval}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-geoeval}
+      GEOSERVER_URL: http://geoserver:8080/geoserver
+      GEOSERVER_ADMIN_USER: ${GEOSERVER_ADMIN_USER:-admin}
+      GEOSERVER_ADMIN_PASSWORD: ${GEOSERVER_ADMIN_PASSWORD:-geoserver}
+      PYTHONPATH: /app
+    volumes:
+      - .:/app
+    working_dir: /app
+    # used via `docker compose run --rm worker ...`; no long-running command
+    depends_on:
+      postgis:
+        condition: service_healthy

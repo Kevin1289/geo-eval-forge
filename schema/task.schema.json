@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geo-eval-forge/schema/task.schema.json",
+  "title": "geo-eval-forge task",
+  "type": "object",
+  "required": ["id", "title", "category", "difficulty", "prompt", "solvable", "verifier"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[a-z0-9-]+$",
+      "description": "unique slug, matches the task directory name (e.g. 02-buffer-area-projected)"
+    },
+    "title": { "type": "string", "minLength": 3 },
+    "category": {
+      "type": "string",
+      "enum": ["crs", "topology", "performance", "services", "rejection", "measurement"]
+    },
+    "difficulty": { "type": "string", "enum": ["easy", "medium", "hard"] },
+    "prompt": { "type": "string", "minLength": 10, "description": "the natural-language task given to a model" },
+    "solvable": { "type": "boolean" },
+    "rejection_reason": {
+      "type": "string",
+      "description": "required for unsolvable tasks: why the task cannot be answered with the given data"
+    },
+    "inputs": {
+      "type": "object",
+      "description": "named layers/files the task uses (seeded by `make seed`)",
+      "additionalProperties": { "type": "string" }
+    },
+    "expected": {
+      "type": "object",
+      "description": "metadata about the golden answer (e.g. target EPSG, unit). The golden value itself lives in golden/answer.json.",
+      "properties": {
+        "epsg": { "type": "integer" },
+        "unit": { "type": "string" },
+        "kind": { "type": "string" }
+      }
+    },
+    "verifier": {
+      "description": "a single verifier spec, or a list that must all pass",
+      "oneOf": [
+        { "$ref": "#/$defs/verifierSpec" },
+        { "type": "array", "items": { "$ref": "#/$defs/verifierSpec" }, "minItems": 1 }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "solvable": { "const": false } } },
+      "then": { "required": ["rejection_reason"] }
+    }
+  ],
+  "$defs": {
+    "verifierSpec": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["numeric", "vector_equiv", "sql_result", "crs_check", "service_check", "rejection"]
+        },
+        "params": { "type": "object" }
+      }
+    }
+  }
+}

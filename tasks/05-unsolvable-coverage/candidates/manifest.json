@@ -1,0 +1,24 @@
+{
+  "candidates": [
+    {
+      "name": "correct",
+      "label": "correct",
+      "description": "Recognizes that the zones layer is partial and no metro boundary exists, and refuses with a reason.",
+      "produced": {
+        "action": "refuse",
+        "reason": "The zones layer covers only part of the study area and there is no city boundary; a city-wide density would require an unprovided denominator."
+      }
+    },
+    {
+      "name": "wrong_silent",
+      "label": "wrong",
+      "failure_class": "answered-unanswerable",
+      "description": "Silently computes a density over the partial zones and reports it as if it were city-wide.",
+      "produced": {
+        "action": "attempt",
+        "value": 12.7,
+        "reason": "Computed sensors per km² over the provided zones."
+      }
+    }
+  ]
+}

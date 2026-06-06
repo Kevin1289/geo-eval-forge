@@ -1,0 +1,12 @@
+{
+  "type": "FeatureCollection",
+  "crs_epsg": 32737,
+  "features": [
+    { "type": "Feature", "properties": { "id": 1 },
+      "geometry": { "type": "Point", "coordinates": [256309.5, 9857311.11] } },
+    { "type": "Feature", "properties": { "id": 2 },
+      "geometry": { "type": "Point", "coordinates": [258537.96, 9855100.81] } },
+    { "type": "Feature", "properties": { "id": 3 },
+      "geometry": { "type": "Point", "coordinates": [254081.0, 9859521.45] } }
+  ]
+}

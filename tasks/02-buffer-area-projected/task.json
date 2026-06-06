@@ -1,0 +1,11 @@
+{
+  "id": "02-buffer-area-projected",
+  "title": "Total area of 1 km sensor buffers",
+  "category": "crs",
+  "difficulty": "easy",
+  "prompt": "The table `t02_points` holds 3 points in EPSG:4326 near Nairobi. Compute the SUM of the areas of a 1 km buffer around each point, in square metres.",
+  "solvable": true,
+  "expected": { "unit": "m2" },
+  "inputs": { "t02_points": "3 points, EPSG:4326" },
+  "verifier": { "name": "numeric", "params": { "rel_tolerance": 0.02 } }
+}

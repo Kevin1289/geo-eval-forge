@@ -1,0 +1,11 @@
+{
+  "id": "04-indexed-dwithin",
+  "title": "Sensors within 500 m of a target",
+  "category": "performance",
+  "difficulty": "medium",
+  "prompt": "Table `t04_sensors` is in EPSG:4326. Return the ids of all sensors within 500 metres of the point (lon 36.81, lat -1.29). Use an index-aware, metric-correct distance test.",
+  "solvable": true,
+  "expected": { "kind": "result_set" },
+  "inputs": { "t04_sensors": "4 points, EPSG:4326" },
+  "verifier": { "name": "sql_result", "params": { "ordered": false } }
+}

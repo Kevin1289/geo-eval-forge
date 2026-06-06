@@ -1,0 +1,13 @@
+The benchmark task data in this repository — everything under `tasks/`, `data/`,
+and `judge/`, including task prompts, golden answers, candidate solutions, and
+synthetic geospatial datasets — is licensed under the
+
+    Creative Commons Attribution 4.0 International License (CC BY 4.0)
+
+You are free to share and adapt this data for any purpose, including training
+and evaluating machine-learning models, provided you give appropriate credit.
+
+Full text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+The source code (everything else) is licensed separately under the MIT License;
+see the LICENSE file.

@@ -1,0 +1,11 @@
+{
+  "id": "05-unsolvable-coverage",
+  "title": "City-wide sensor density (unanswerable)",
+  "category": "rejection",
+  "difficulty": "hard",
+  "prompt": "Using the `zones` layer, report the city-wide average sensor density (sensors per km²) for the ENTIRE Nairobi metropolitan area.",
+  "solvable": false,
+  "rejection_reason": "The zones layer covers only the south-west quadrant of the study area, and no city/metropolitan boundary layer is provided. A city-wide density cannot be computed from partial-coverage data without inventing the denominator.",
+  "inputs": { "zones": "polygons covering only part of the study area" },
+  "verifier": { "name": "rejection", "params": {} }
+}
